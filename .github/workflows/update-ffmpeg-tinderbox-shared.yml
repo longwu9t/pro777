@@ -1,0 +1,49 @@
+name: Update ffmpeg-tinderbox
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest release
+        id: release
+        run: |
+          TAG=$(curl -s https://api.github.com/repos/nanake/ffmpeg-tinderbox/releases/latest | jq -r .tag_name)
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Update manifest
+        run: |
+          TAG="${{ steps.release.outputs.tag }}"
+
+          jq \
+            --arg v "$TAG" \
+            --arg url "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$TAG/ffmpeg-win64-nonfree-shared.tar.zst" \
+            '.version=$v |
+             .architecture."64bit".url=$url |
+             .autoupdate.architecture."64bit".url="https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"' \
+            bucket/ffmpeg-tinderbox-shared.json \
+            > tmp.json
+
+          mv tmp.json bucket/ffmpeg-tinderbox-shared.json
+
+      - name: Commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add bucket/ffmpeg-tinderbox-shared.json
+
+          git commit -m "Update ffmpeg-tinderbox-shared" || exit 0
+
+          git push
