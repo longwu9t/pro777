@@ -10,14 +10,15 @@
         }
     },
 
-    "post_install": [
-        "Get-ChildItem \"$dir\" -Directory | ForEach-Object {",
-        "    if (Test-Path \"$($_.FullName)\\bin\\ffmpeg.exe\") {",
-        "        Move-Item \"$($_.FullName)\\*\" \"$dir\" -Force",
-        "        Remove-Item \"$($_.FullName)\" -Recurse -Force",
-        "    }",
-        "}"
-    ],
+    "installer": {
+        "script": [
+            "$root = Get-ChildItem \"$dir\" -Directory | Where-Object { Test-Path \"$($_.FullName)\\bin\\ffmpeg.exe\" }",
+            "if ($root) {",
+            "    Move-Item \"$($root.FullName)\\*\" \"$dir\" -Force",
+            "    Remove-Item \"$($root.FullName)\" -Recurse -Force",
+            "}"
+        ]
+    },
 
     "bin": [
         [
