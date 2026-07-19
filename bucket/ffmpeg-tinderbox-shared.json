@@ -1,0 +1,45 @@
+{
+    "version": "git",
+    "description": "FFmpeg nonfree shared build from nanake tinderbox",
+    "homepage": "https://github.com/nanake/ffmpeg-tinderbox",
+    "license": "GPL-3.0",
+
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+        }
+    },
+
+    "pre_install": [
+        "7z x \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\" -so | bsdtar -xf - --strip-components=1 -C \"$dir\"",
+        "Remove-Item \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\""
+    ],
+
+    "bin": [
+        [
+            "bin\\ffmpeg.exe",
+            "ffmpeg"
+        ],
+        [
+            "bin\\ffprobe.exe",
+            "ffprobe"
+        ],
+        [
+            "bin\\ffplay.exe",
+            "ffplay"
+        ]
+    ],
+
+    "checkver": {
+        "url": "https://api.github.com/repos/nanake/ffmpeg-tinderbox/releases/latest",
+        "jsonpath": "$.tag_name"
+    },
+
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+            }
+        }
+    }
+}
