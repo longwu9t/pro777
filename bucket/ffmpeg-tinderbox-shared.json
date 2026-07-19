@@ -1,5 +1,5 @@
 {
-    "version": "git",
+    "version": "0",
     "description": "FFmpeg nonfree shared build from nanake tinderbox",
     "homepage": "https://github.com/nanake/ffmpeg-tinderbox",
     "license": "GPL-3.0",
