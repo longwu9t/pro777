@@ -11,7 +11,7 @@
     },
 
     "pre_install": [
-        "7z x \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\" -so | bsdtar -xf - --strip-components=1 -C \"$dir\"",
+        "7z x \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\" -so | 7z x -si -ttar -spe -o\"$dir\"",
         "Remove-Item \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\""
     ],
 
