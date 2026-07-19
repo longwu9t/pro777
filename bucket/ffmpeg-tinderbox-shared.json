@@ -10,9 +10,13 @@
         }
     },
 
-    "pre_install": [
-        "7z x \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\" -so | 7z x -si -ttar -spe -o\"$dir\"",
-        "Remove-Item \"$dir\\ffmpeg-win64-nonfree-shared.tar.zst\""
+    "post_install": [
+        "Get-ChildItem \"$dir\" -Directory | ForEach-Object {",
+        "    if (Test-Path \"$($_.FullName)\\bin\\ffmpeg.exe\") {",
+        "        Move-Item \"$($_.FullName)\\*\" \"$dir\" -Force",
+        "        Remove-Item \"$($_.FullName)\" -Recurse -Force",
+        "    }",
+        "}"
     ],
 
     "bin": [
