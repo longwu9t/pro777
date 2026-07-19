@@ -6,7 +6,9 @@
 
     "architecture": {
         "64bit": {
-            "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+            "url": [
+                "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+            ]
         }
     },
 
@@ -38,7 +40,9 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+                "url": [
+                    "https://github.com/nanake/ffmpeg-tinderbox/releases/download/$version/ffmpeg-win64-nonfree-shared.tar.zst"
+                ]
             }
         }
     }
