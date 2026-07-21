@@ -1,11 +1,11 @@
 {
-  "version": "build-2026-07-19-22-01-n125703",
+  "version": "build-2026-07-20-22-08-n125705",
   "description": "FFmpeg nonfree shared build from nanake tinderbox",
   "homepage": "https://github.com/nanake/ffmpeg-tinderbox",
   "license": "GPL-3.0",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/build-2026-07-19-22-01-n125703/ffmpeg-win64-nonfree-shared.tar.zst"
+      "url": "https://github.com/nanake/ffmpeg-tinderbox/releases/download/build-2026-07-20-22-08-n125705/ffmpeg-win64-nonfree-shared.tar.zst"
     }
   },
   "installer": {
